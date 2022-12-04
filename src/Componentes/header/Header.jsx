@@ -1,4 +1,5 @@
 import React from "react";
+import "./Header.css"
 
 const Header = () => {
   return (
@@ -7,6 +8,7 @@ const Header = () => {
         <a className="navbar-item">
           <img src="./images.png" />
         </a>
+        <h1 className="pos">Buscador de Noticias</h1>
       </div>
     </div>
   );

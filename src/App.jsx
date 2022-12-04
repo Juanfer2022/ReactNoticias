@@ -9,6 +9,11 @@ const router = createBrowserRouter([
     element: <PajinaBuscarNoticias />,
     errorElement: <Error404/>
   },
+  {
+    path: "/buscador",
+    element: <PajinaBuscarNoticias />,
+    
+  },
 ]);
 function App() {
   return (

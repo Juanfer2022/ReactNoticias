@@ -1,9 +1,11 @@
 import { CircularProgress, Container } from "@mui/material";
 
+
 const Loading = () => {
   return (
-    <section>
+    <section >
       <CircularProgress />
+      <h2>Buscando...</h2>
     </section>
   );
 };
