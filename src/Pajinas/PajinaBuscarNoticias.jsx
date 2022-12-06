@@ -8,30 +8,58 @@ import { getListadoNoticias } from "../Servicios/noticias";
 import "./PaginaBuscadorNoticias.css";
 import { useEffect, useState } from "react";
 import CantNoticias from "../Componentes/Noticias/CantNoticias";
+import { useSearchParams } from "react-router-dom";
 
 const PajinaBuscarNoticias = () => {
   const [noticias, setNoticias] = useState();
   const [isLoading, setIsLoading] = useState(false);
-
-  const onBuscarNoticias = async (criterioBusqueda) => {
+  const [cantPaginas, setCantPaginas] = useState(1); 
+  const [pagina, setPagina] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  useEffect(() => {
+    console.log(pagina)
+    if(searchParams.get('query')) {
+      
+        buscarNoticias(pagina)
+    }
+}, [searchParams, pagina]);
+  
+  const buscarNoticias =  async () => {
+  
     setIsLoading(true);
-    const noti = await getListadoNoticias(criterioBusqueda);
+    const noti = await getListadoNoticias(searchParams.get('query'), pagina);
+  
     setNoticias(noti);
     setIsLoading(false);
-  };
-  console.log(noticias);
 
- 
-
+    const cantidadDePagina = Math.ceil(parseInt(noti.totalResults) / 10);
+    setCantPaginas(cantidadDePagina);
+  }
   
+  const onBuscarNoticias =  (criterioBusqueda) => {
+    setSearchParams({query: criterioBusqueda})
+   
+  };
+
+  const onCambioPagina = (pagina) => {
+    
+    setPagina(pagina);
+  };
+
   return (
     <section className="container">
       <Header />
       <BuscadorNoticias onBuscarNoticias={onBuscarNoticias} />
-      { isLoading && <Loading /> }
-      {noticias && <CantNoticias noticias={noticias}/>}
-      {noticias && <ListaNoticias noticias = {noticias} />}
-      {noticias &&< PaginadoDeNoticias />}
+      {isLoading && <Loading />}
+      {noticias && <CantNoticias noticias={noticias} />}
+      {noticias && <ListaNoticias noticias={noticias} />}
+      {noticias && (
+        <PaginadoDeNoticias
+          cantPaginas={cantPaginas}
+          onChange={onCambioPagina}
+        />
+      )}
     </section>
   );
 };

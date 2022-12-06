@@ -1,10 +1,16 @@
 import { Pagination } from "@mui/material";
 import "./PaginadoDeNoticias.css"
-const PaginadoDeNoticias = () => {
+const PaginadoDeNoticias = ({cantPaginas, onChange}) => {
+ 
+  const cambiaPagina =(_evento, pagina)=>{
+    console.log(_evento)
+    onChange(pagina)
+  }
   return (
     <section className="centr">
       {" "}
-      <Pagination count={10} color="secondary" />
+      <Pagination count={cantPaginas} color="secondary"  onChange={cambiaPagina} 
+       />
     </section>
   );
 };

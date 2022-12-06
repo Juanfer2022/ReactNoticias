@@ -7,8 +7,7 @@ const Noticias = ({ noticia }) => {
   const dt=DateTime.fromISO(noticia.publishedAt).toFormat('dd/MM/yyyy') 
   const dt2=DateTime.fromISO(noticia.publishedAt).toFormat('tt')
   const pub = noticia.publishedAt
-  console.log(dt)
-  console.log(dt2)
+  
   return (
     <div>
       <div>
@@ -26,7 +25,8 @@ const Noticias = ({ noticia }) => {
                   <h3>Publicado el: {dt} a las: {dt2} </h3>
                 </span>
               </p>
-              <img src={noticia.urlToImage} alt="inLaw Proyecto" className="cen" />
+              <img src={noticia.urlToImage === null ? './imageNoEncontrada.png' : noticia.urlToImage }  
+              alt="inLaw Proyecto" className="cen" />
             </div>
           </div>
         </div>
