@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <PajinaBuscarNoticias />,
   },
   {
-    path: "/buscador/:url",
+    path: "/buscador/:id",
     element: <PaginaDetalleNoticias />,
   },
 ]);
